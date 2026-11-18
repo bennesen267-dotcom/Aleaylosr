@@ -4,11 +4,10 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: alwayslose
     steps:
       - uses: actions/checkout@v4
+      - name: Zip'i aç
+        run: unzip -q ./*.zip
       - uses: actions/setup-java@v4
         with:
           java-version: 17
@@ -16,8 +15,9 @@ jobs:
       - uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.5
-          build-root-directory: alwayslose
-      - run: gradle build
+      - name: Derle
+        working-directory: alwayslose
+        run: gradle build
       - uses: actions/upload-artifact@v4
         with:
           name: alwayslose
